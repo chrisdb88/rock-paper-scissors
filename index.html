@@ -7,7 +7,140 @@
     </head>
     <body>
         <script>
+
+            // console.log(Math.floor((Math.random() * 10) + 1)) 
+            // randomly prints an integer between 1 and 10
+
+            let computerChoice
+
+            let randomNumberGenerator = () => (Math.floor((Math.random() * 3) + 1));
+                // random integer between 1 and 3
+
+            let computerChoiceFunc = function (numberChoice) {
+                
+                if (numberChoice === 1) {
+                    computerChoice = "rock"
+                } else if (numberChoice === 2) {
+                    computerChoice = "paper"
+                } else if (numberChoice === 3) {
+                    computerChoice = "scissors"
+                } else {
+                    console.log("invalid argument")
+                }
+                return computerChoice
+            };
+
+            // console.log(computerChoiceFunc(randomNumberGenerator()))
             
+            let userGamePromptString = "rock, paper, scissors! Enter 'rock,' 'paper,' or 'scissors,' (case sensitive) or an integer between 1 and 3 respectively"
+
+            let singleRound = function (userGamePromptParam, computerChoiceParam) {
+
+                if (userGamePromptParam === "rock" || userGamePromptParam === "1") {
+                    console.log("You chose rock!")
+                    if (computerChoiceParam === "rock") {
+                        console.log("The computer chooses rock, it's a draw!")
+                        return "draw"
+                    } else if (computerChoiceParam === "paper") {
+                        console.log("The computer chooses paper, you lose!")
+                        return "loss"
+                    } else if (computerChoiceParam === "scissors") {
+                        console.log("The computer chooses scissors, you win!")
+                        return "win"
+                    }
+                }
+                
+                else if (userGamePromptParam === "paper" || userGamePromptParam === "2") {
+                    console.log("You chose paper!")
+                    if (computerChoiceParam === "paper") {
+                        console.log("The computer chooses paper, it's a draw!")
+                        return "draw"
+                    } else if (computerChoiceParam === "scissors") {
+                        console.log("The computer chooses scissors, you lose!")
+                        return "loss"
+                    } else if (computerChoiceParam === "rock") {
+                        console.log("The computer chooses rock, you win!")
+                        return "win"
+                    }
+                }         
+
+                else if (userGamePromptParam === "scissors" || userGamePromptParam === "3") {
+                    console.log("You chose scissors!")
+                    if (computerChoiceParam === "scissors") {
+                        console.log("The computer chooses scissors, it's a draw!")
+                        return "draw"
+                    } else if (computerChoiceParam === "rock") {
+                        console.log("The computer chooses rock, you lose!")
+                        return "loss"
+                    } else if (computerChoiceParam === "paper") {
+                        console.log("The computer chooses paper, you win!")
+                        return "win"
+                    }
+                } else {
+                    console.log("Invalid input!")
+                    return "invalid"
+                }
+            }
+                
+            // singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator()))
+
+
+            let fiveRounds = function () {
+
+                let userScore = 0
+                let computerScore = 0
+
+                let roundsPlayed = 0
+                let roundsToPlay = 5
+
+                // let roundStatus = singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator()))
+
+                function determineResult(roundStatusParam) {
+                    if (roundStatusParam === "draw") {
+                        computerScore++
+                        userScore++
+                        roundsPlayed++
+                    } else if (roundStatusParam === "loss") {
+                        computerScore++
+                        roundsPlayed++
+                    } else if (roundStatusParam === "win") {
+                        userScore++
+                        roundsPlayed++
+                    } else if (roundStatusParam === "invalid") {
+                        alert("Input is invalid, please try again.")
+                        determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+                        return
+                    }
+                }
+
+                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+
+                let userScoreDisplay = ""
+                let computerScoreDisplay = ""
+
+                console.log("--------------------------")
+
+                if (userScore === computerScore) {
+                    console.log("It's a draw!")
+                    console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
+                    console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
+                } else if (userScore > computerScore) {
+                    console.log("You won!")
+                    console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
+                    console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
+                } else if (userScore < computerScore) {
+                    console.log("You lost!")
+                    console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
+                    console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
+                }
+            }
+
+            fiveRounds()
+
         </script>
     </body>
 </html>
