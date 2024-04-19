@@ -1,24 +1,25 @@
 # rock-paper-scissors
 
 
+
+
 this will all function in the console for now
 
-make the computer randomly select one of the three: rock paper or scissors
+Will prompt for user input.
 
-there are always 3 results, win / lose / draw
+The computer will generate a number between 1 and 3, which determines which option it chooses. 
+Rock, paper, or scissors respectively.
 
-the same option = draw
-1 of them will = win
-1 of them will = lose
+When the user enters an input, it will determine if that input is valid or not, given the options prompted.
 
-will need 3 functions for a user input of rock, paper, and scissors
+If the input is invalid, it restarts the prompt.
 
-each of those functions will need 3 else if checks for each potential outcome
+If it's valid, it will compare the value of the computer's choice, and the user's choice, to determine who the
+victor is for that round. A message will be printed indicating such.
 
-you will need to use a prompt function, then return that prompt, if the prompt is invalid, try again,
-if they press cancel, show a message, refresh page to play again.
+There are 5 rounds.
 
-
+At the end of the 5 rounds, it tells you if you won, lost, or if it was as draw, and the score is displayed.
 
 
 
