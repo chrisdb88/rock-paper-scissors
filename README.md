@@ -31,7 +31,7 @@ but with ui interactivity.
 
 The contents within the header, the images, and the bottom left will update according to a cetain result.
 
-The buttons will react on mouse movements / hovering, and clicking
+
 
 
 
