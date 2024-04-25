@@ -23,4 +23,23 @@ At the end of the 5 rounds, it tells you if you won, lost, or if it was as draw,
 
 
 
+Part Two -------
+
+When the user clicks one of the three options of buttons, an event listener function will be invoked.
+Depending on which one was pressed, the "player choice" will be passed. It will effectively function the same,
+but with ui interactivity.
+
+The contents within the header, the images, and the bottom left will update according to a cetain result.
+
+The buttons will react on mouse movements / hovering, and clicking
+
+
+
+
+
+
+
+
+
+
 

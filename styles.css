@@ -69,12 +69,13 @@ body {
 }
 
 .leftImage, .rightImage {
-    height: 100%;
-    width: 100%;
+    height: 300px;
+    width: 300px;
     /* flex-basis: 100%; */
     border: 2px solid #912640;
     border-radius: 10px;
     background-color: white;
+    object-fit: fill;
 }
 
 

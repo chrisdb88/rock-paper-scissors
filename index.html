@@ -26,19 +26,19 @@
                     <img class="rightImage">
                 </div>
                 <div class="rightBottom">
-                    <button class="rock">rock</button>
-                    <button class="paper">paper</button>
-                    <button class="scissors">scissors</button>
+                    <button class="rock" type="button">rock</button>
+                    <button class="paper" type="button">paper</button>
+                    <button class="scissors" type="button">scissors</button>
                 </div>
             </div>
         </div>
         
-
         <script>
 
             // console.log(Math.floor((Math.random() * 10) + 1)) 
             // randomly prints an integer between 1 and 10
 
+            let playerContainer = document.querySelector(".playerContainer")
             let headerText = document.querySelector(".headerText")
             let leftImage = document.querySelector(".leftImage")
             let rightImage = document.querySelector(".rightImage")
@@ -47,16 +47,154 @@
             let paperButton = document.querySelector(".paper")
             let scissorsButton = document.querySelector(".scissors")
 
-            rockButton.addEventListener("click", function(e) {
+            let baseHeaderText = "Rock, Paper, Scissors!"
+
+            let userScore = 0
+            let computerScore = 0
+
+            let roundsPlayed = 0
+            let roundsToPlay = 5
+
+            let whenRoundsMet = function (result) {
+                if (roundsPlayed < roundsToPlay) {
+                        headerText.textContent = `${computerScore} | ${result} |  ${userScore}`
+                    } else {
+                        let textToConcatenate = ""
+                        if (userScore > computerScore) {
+                            textToConcatenate = "You Won!"
+                        } else if (userScore < computerScore) {
+                            textToConcatenate = "You Lose"
+                        } else if (userScore === computerScore) {
+                            textToConcatenate = "It's a Draw!"
+                        }
+                        headerText.textContent = `${computerScore} | Game Over ! ${textToConcatenate} |  ${userScore}`
+                        userScore = 0
+                        computerScore = 0
+                        roundsPlayed = 0
+                    }
+            }
+
+            rockButton.addEventListener("click", function() {
                 let computerChoice = computerChoiceFunc()
+                let result = decideResult("rock", computerChoice)
+
+                if (result === "win") {
+                    leftImage.src = "./img/scissors.webp"
+                    leftBottomTextContainer.textContent = "Scissors!"
+                    userScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "#99ff66"
+                    whenRoundsMet("Win!")
+                } else if (result === "loss") {
+                    leftImage.src = "./img/paper.webp"
+                    leftBottomTextContainer.textContent = "Paper!"
+                    computerScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "#ff5050"
+                    whenRoundsMet("Loss!")
+                } else if (result === "draw") {
+                    leftImage.src = "./img/rock.webp"
+                    leftBottomTextContainer.textContent = "Rock!"
+                    userScore++;
+                    computerScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "lightyellow"
+                    whenRoundsMet("Draw!")
+                }
+                rightImage.src = "./img/rock.webp"
             })
 
+            paperButton.addEventListener("click", function() {
+                let computerChoice = computerChoiceFunc()
+                let result = decideResult("paper", computerChoice)
 
-            let randomNumberGenerator = () => (Math.floor((Math.random() * 3) + 1));
-                // random integer between 1 and 3
+                if (result === "win") {
+                    leftImage.src = "./img/rock.webp"
+                    leftBottomTextContainer.textContent = "Rock!"
+                    userScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "#99ff66"
+                    whenRoundsMet("Win!")
+                } else if (result === "loss") {
+                    leftImage.src = "./img/scissors.webp"
+                    leftBottomTextContainer.textContent = "Scissors!"
+                    computerScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "#ff5050"
+                    whenRoundsMet("Loss!")
+                } else if (result === "draw") {
+                    leftImage.src = "./img/paper.webp"
+                    leftBottomTextContainer.textContent = "Paper!"
+                    userScore++;
+                    computerScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "lightyellow"
+                    whenRoundsMet("Draw!")
+                }
+                rightImage.src = "./img/paper.webp"
+            })
 
-            let computerChoiceFunc = function (numberChoice) {
-                
+            scissorsButton.addEventListener("click", function() {
+                let computerChoice = computerChoiceFunc()
+                let result = decideResult("scissors", computerChoice)
+
+                if (result === "win") {
+                    leftImage.src = "./img/paper.webp"
+                    leftBottomTextContainer.textContent = "Paper!"
+                    userScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "#99ff66"
+                    whenRoundsMet("Win!")
+                } else if (result === "loss") {
+                    leftImage.src = "./img/rock.webp"
+                    leftBottomTextContainer.textContent = "Rock!"
+                    computerScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "#ff5050"
+                    whenRoundsMet("Loss!")
+                } else if (result === "draw") {
+                    leftImage.src = "./img/scissors.webp"
+                    leftBottomTextContainer.textContent = "Scissors!"
+                    userScore++;
+                    computerScore++;
+                    roundsPlayed++;
+                    playerContainer.style.backgroundColor = "lightyellow"
+                    whenRoundsMet("Draw!")
+                }
+                rightImage.src = "./img/scissors.webp"
+            })
+
+            let decideResult = function (playerChoice, computerChoice) {
+                let Result = ""
+                if (playerChoice === computerChoice) {
+                    Result = "draw"
+                } else if (playerChoice !== computerChoice) {
+                    if (playerChoice === "rock") {
+                        if (computerChoice === "paper") {
+                            Result = "loss"
+                        } else if (computerChoice === "scissors") {
+                            Result = "win"
+                        }
+                    } else if (playerChoice === "paper") {
+                        if (computerChoice === "rock") {
+                            Result = "win"
+                        } else if (computerChoice === "scissors") {
+                            Result = "loss"
+                        }
+                    } else if (playerChoice === "scissors") {
+                        if (computerChoice === "rock") {
+                            Result = "loss"
+                        } else if (computerChoice === "paper") {
+                            Result = "win"
+                        }
+                    }
+                }
+                return Result
+            }
+
+            let computerChoiceFunc = function () {
+                let numberChoice = (Math.floor((Math.random() * 3) + 1));
+
                 if (numberChoice === 1) {
                     computerChoice = "rock"
                 } else if (numberChoice === 2) {
@@ -71,112 +209,112 @@
 
             // console.log(computerChoiceFunc(randomNumberGenerator()))
             
-            let userGamePromptString = "rock, paper, scissors! Enter 'rock,' 'paper,' or 'scissors,' (case sensitive) or an integer between 1 and 3 respectively"
+            // let userGamePromptString = "rock, paper, scissors! Enter 'rock,' 'paper,' or 'scissors,' (case sensitive) or an integer between 1 and 3 respectively"
 
-            let singleRound = function (userGamePromptParam, computerChoiceParam) {
+            // let singleRound = function (userGamePromptParam, computerChoiceParam) {
 
-                if (userGamePromptParam === "rock" || userGamePromptParam === "1") {
-                    console.log("You chose rock!")
-                    if (computerChoiceParam === "rock") {
-                        console.log("The computer chooses rock, it's a draw!")
-                        return "draw"
-                    } else if (computerChoiceParam === "paper") {
-                        console.log("The computer chooses paper, you lose!")
-                        return "loss"
-                    } else if (computerChoiceParam === "scissors") {
-                        console.log("The computer chooses scissors, you win!")
-                        return "win"
-                    }
-                }
+            //     if (userGamePromptParam === "rock" || userGamePromptParam === "1") {
+            //         console.log("You chose rock!")
+            //         if (computerChoiceParam === "rock") {
+            //             console.log("The computer chooses rock, it's a draw!")
+            //             return "draw"
+            //         } else if (computerChoiceParam === "paper") {
+            //             console.log("The computer chooses paper, you lose!")
+            //             return "loss"
+            //         } else if (computerChoiceParam === "scissors") {
+            //             console.log("The computer chooses scissors, you win!")
+            //             return "win"
+            //         }
+            //     }
                 
-                else if (userGamePromptParam === "paper" || userGamePromptParam === "2") {
-                    console.log("You chose paper!")
-                    if (computerChoiceParam === "paper") {
-                        console.log("The computer chooses paper, it's a draw!")
-                        return "draw"
-                    } else if (computerChoiceParam === "scissors") {
-                        console.log("The computer chooses scissors, you lose!")
-                        return "loss"
-                    } else if (computerChoiceParam === "rock") {
-                        console.log("The computer chooses rock, you win!")
-                        return "win"
-                    }
-                }         
+            //     else if (userGamePromptParam === "paper" || userGamePromptParam === "2") {
+            //         console.log("You chose paper!")
+            //         if (computerChoiceParam === "paper") {
+            //             console.log("The computer chooses paper, it's a draw!")
+            //             return "draw"
+            //         } else if (computerChoiceParam === "scissors") {
+            //             console.log("The computer chooses scissors, you lose!")
+            //             return "loss"
+            //         } else if (computerChoiceParam === "rock") {
+            //             console.log("The computer chooses rock, you win!")
+            //             return "win"
+            //         }
+            //     }         
 
-                else if (userGamePromptParam === "scissors" || userGamePromptParam === "3") {
-                    console.log("You chose scissors!")
-                    if (computerChoiceParam === "scissors") {
-                        console.log("The computer chooses scissors, it's a draw!")
-                        return "draw"
-                    } else if (computerChoiceParam === "rock") {
-                        console.log("The computer chooses rock, you lose!")
-                        return "loss"
-                    } else if (computerChoiceParam === "paper") {
-                        console.log("The computer chooses paper, you win!")
-                        return "win"
-                    }
-                } else {
-                    console.log("Invalid input!")
-                    return "invalid"
-                }
-            }
+            //     else if (userGamePromptParam === "scissors" || userGamePromptParam === "3") {
+            //         console.log("You chose scissors!")
+            //         if (computerChoiceParam === "scissors") {
+            //             console.log("The computer chooses scissors, it's a draw!")
+            //             return "draw"
+            //         } else if (computerChoiceParam === "rock") {
+            //             console.log("The computer chooses rock, you lose!")
+            //             return "loss"
+            //         } else if (computerChoiceParam === "paper") {
+            //             console.log("The computer chooses paper, you win!")
+            //             return "win"
+            //         }
+            //     } else {
+            //         console.log("Invalid input!")
+            //         return "invalid"
+            //     }
+            // }
                 
-            // singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator()))
+            // // singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator()))
 
 
-            let fiveRounds = function () {
+            // let fiveRounds = function () {
 
-                let userScore = 0
-                let computerScore = 0
+            //     let userScore = 0
+            //     let computerScore = 0
 
-                let roundsPlayed = 0
-                let roundsToPlay = 5
+            //     let roundsPlayed = 0
+            //     let roundsToPlay = 5
 
-                // let roundStatus = singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator()))
+            //     // let roundStatus = singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator()))
 
-                function determineResult(roundStatusParam) {
-                    if (roundStatusParam === "draw") {
-                        computerScore++
-                        userScore++
-                        roundsPlayed++
-                    } else if (roundStatusParam === "loss") {
-                        computerScore++
-                        roundsPlayed++
-                    } else if (roundStatusParam === "win") {
-                        userScore++
-                        roundsPlayed++
-                    } else if (roundStatusParam === "invalid") {
-                        alert("Input is invalid, please try again.")
-                        determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
-                        return
-                    }
-                }
+            //     function determineResult(roundStatusParam) {
+            //         if (roundStatusParam === "draw") {
+            //             computerScore++
+            //             userScore++
+            //             roundsPlayed++
+            //         } else if (roundStatusParam === "loss") {
+            //             computerScore++
+            //             roundsPlayed++
+            //         } else if (roundStatusParam === "win") {
+            //             userScore++
+            //             roundsPlayed++
+            //         } else if (roundStatusParam === "invalid") {
+            //             alert("Input is invalid, please try again.")
+            //             determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+            //             return
+            //         }
+            //     }
 
-                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
-                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
-                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
-                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
-                determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+            //     determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+            //     determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+            //     determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+            //     determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
+            //     determineResult(singleRound(prompt(userGamePromptString), computerChoiceFunc(randomNumberGenerator())))
 
-                let userScoreDisplay = ""
-                let computerScoreDisplay = ""
+            //     let userScoreDisplay = ""
+            //     let computerScoreDisplay = ""
 
-                console.log("--------------------------")
+            //     console.log("--------------------------")
 
-                if (userScore === computerScore) {
-                    console.log("It's a draw!")
-                    console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
-                    console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
-                } else if (userScore > computerScore) {
-                    console.log("You won!")
-                    console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
-                    console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
-                } else if (userScore < computerScore) {
-                    console.log("You lost!")
-                    console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
-                    console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
-                }
-            }
+            //     if (userScore === computerScore) {
+            //         console.log("It's a draw!")
+            //         console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
+            //         console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
+            //     } else if (userScore > computerScore) {
+            //         console.log("You won!")
+            //         console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
+            //         console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
+            //     } else if (userScore < computerScore) {
+            //         console.log("You lost!")
+            //         console.log(userScoreDisplay.concat("Your Score: ", userScore.toString()))
+            //         console.log(computerScoreDisplay.concat("Computer Score: ", computerScore.toString()))
+            //     }
+            // }
 
             // fiveRounds()
 
