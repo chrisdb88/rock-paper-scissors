@@ -17,7 +17,9 @@
                 <div class="leftTop">
                     <img class="leftImage">
                 </div>
-                <div class="leftBottom">Computer input will display here.</div>
+                <div class="leftBottom">
+                    <div class="leftBottomTextContainer">Computer input will display here.</div>
+                </div>
             </div>
             <div class="rightContainer">
                 <div class="rightTop">
@@ -37,7 +39,18 @@
             // console.log(Math.floor((Math.random() * 10) + 1)) 
             // randomly prints an integer between 1 and 10
 
-            let computerChoice
+            let headerText = document.querySelector(".headerText")
+            let leftImage = document.querySelector(".leftImage")
+            let rightImage = document.querySelector(".rightImage")
+            let leftBottomTextContainer = document.querySelector(".leftBottomTextContainer")
+            let rockButton = document.querySelector(".rock")
+            let paperButton = document.querySelector(".paper")
+            let scissorsButton = document.querySelector(".scissors")
+
+            rockButton.addEventListener("click", function(e) {
+                let computerChoice = computerChoiceFunc()
+            })
+
 
             let randomNumberGenerator = () => (Math.floor((Math.random() * 3) + 1));
                 // random integer between 1 and 3

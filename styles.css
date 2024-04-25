@@ -34,6 +34,7 @@ body {
     padding: 10px;
     border: 2px solid black;
     font-size: 40px;
+    background-color: white;
 }
 
 .playerContainer {
@@ -71,37 +72,38 @@ body {
     height: 100%;
     width: 100%;
     /* flex-basis: 100%; */
-    border: 2px solid #001aff;
+    border: 2px solid #912640;
     border-radius: 10px;
+    background-color: white;
 }
 
-.rock, .paper, .scissors {
+
+
+.rock, .paper, .scissors, .leftBottomTextContainer {
     margin-top: 10px;
     font-weight: 700;
     font-size: 25px;
-    width: 25%;
-    height: 25%;
     background-color: #912640;
     color: white;
     border: 4px solid white;
     border-radius: 10px;
 }
 
-.leftBottom {
-    /* padding-top: 10px; */
-    padding: 10px 10px 0 10px;
-    font-weight: 700;
-    font-size: 35px;
+.rock, .paper, .scissors {
+    width: 25%;
+    height: 25%;
 }
+
+.leftBottomTextContainer {
+    padding: 16px;
+}
+
 
 
 
 /* * {
     border: 2px solid blue;
 } */
-
-
-
 
 .headerContainer {
     background-color: lightgreen
